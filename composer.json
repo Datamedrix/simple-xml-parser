@@ -1,14 +1,15 @@
 {
     "name": "dmx/simple-xml-parser",
-    "description": "",
+    "description": "A simple XML Parser which parses an XML into a normalized array based on SimpleXMLElement.",
     "keywords": ["xml", "parser", "simpleXML"],
     "license": "MIT",
     "type": "library",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "require": {
         "php": "^7.2.1",
         "ext-json": "*",
         "ext-simplexml": "*",
+        "ext-libxml": "*"
     },
     "require-dev": {
         "ext-mbstring": "*",
