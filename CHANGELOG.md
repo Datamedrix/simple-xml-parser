@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.0.1"></a>
+# 1.0.1 (2018-10-24)
+
+### Fixes
+
+* **parser:** fix some major issues
+    * remove all comments from the given xml content
+    * use a deeper declaration of the xpath to remove empty nodes
+    * add an dummy array element to the default '@attribute' key to prevent strange copy behaviours of the empty array
+
 <a name="1.0.0"></a>
 # 1.0.0 (2018-10-23)
 
