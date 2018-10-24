@@ -85,9 +85,8 @@ class ParserTest extends TestCase
                 'bar' => 1,
             ],
             'element_b' => [
-                '@attributes' => [],
+                '@attributes' => ['__' => null],
                 'element_c' => [
-                    '@attributes' => [],
                     0 => [
                         '@attributes' => [
                             'name' => 'bar',
@@ -97,22 +96,21 @@ class ParserTest extends TestCase
                         'value2' => 'jadda jdadda',
                     ],
                     1 => [
-                        '@attributes' => [],
+                        '@attributes' => ['__' => null],
                         'value1' => '-200',
                         'value2' => 'bla bla bla bla bla 42 bla',
                     ],
                     2 => [
-                        '@attributes' => [],
+                        '@attributes' => ['__' => null],
                         'value1' => '23',
                         'value2' => 'text',
                         'more' => [
-                            '@attributes' => [],
                             0 => [
-                                '@attributes' => [],
+                                '@attributes' => ['__' => null],
                                 'name' => 'test 1',
                             ],
                             1 => [
-                                '@attributes' => [],
+                                '@attributes' => ['__' => null],
                                 'name' => 'test 2',
                             ],
                             2 => [
@@ -122,7 +120,7 @@ class ParserTest extends TestCase
                         ],
                     ],
                     3 => [
-                        '@attributes' => [],
+                        '@attributes' => ['__' => null],
                         'value1' => '0',
                     ],
                 ],
@@ -153,7 +151,7 @@ class ParserTest extends TestCase
                 <more test="true"><name>test 3</name></more>
             </element_c>
             <element_c>
-                <value1>0</value1>
+                <value1>0</value1><!-- a comment -->
                 <value2></value2>
             </element_c>
         </element_b>

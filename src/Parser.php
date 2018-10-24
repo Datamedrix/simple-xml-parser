@@ -45,7 +45,7 @@ class Parser
      */
     public function __construct(string $xmlContent)
     {
-        $this->xmlContent = trim($xmlContent);
+        $this->xmlContent = preg_replace('/<!--(.|\n)*?-->/m', '', trim($xmlContent));
     }
 
     /**
@@ -83,8 +83,32 @@ class Parser
         if ($this->xml === null) {
             $this->xml = new SimpleXMLElement($this->xmlContent, $this->simpleXMLOptions(), false);
 
-            // remove empty tags
-            $xpath = '//*[not(normalize-space())]';
+            /* --- remove empty tags ---
+                Select the document element
+                /*
+                Any descendant of the document element
+                /*//*
+                ...with only whitespaces as text content (this includes descendants)
+                /*//*[normalize-space(.) = ""]
+                ...and no have attributes
+                /*//*[normalize-space(.) = "" and not(@*)]
+                ...or an descendants with attributes
+                /*//*[normalize-space(.) = "" and not(@* or .//*[@*])]
+                ...or a comment
+                /*//*[normalize-space(.) = "" and not(@* or .//*[@*] or .//comment())]
+                ...or a processing instruction
+                /*//*[
+                normalize-space(.) = "" and not(@* or .//*[@*] or .//comment() or .//processing-instruction())
+                ]
+            */
+            $xpath = '/*//*[
+                   normalize-space(.) = "" and
+                   not (
+                    @* or 
+                    .//*[@*] or
+                    .//processing-instruction()
+                   )
+            ]';
             foreach (array_reverse($this->xml->xpath($xpath)) as $remove) {
                 unset($remove[0]);
             }
@@ -100,8 +124,8 @@ class Parser
      */
     protected function normalizeArray(array $array): array
     {
-        if (!isset($array['@attributes'])) {
-            $array['@attributes'] = [];
+        if (!isset($array['@attributes']) && count(array_filter(array_keys($array), 'is_string')) > 0) {
+            $array['@attributes'] = ['__' => null];
         }
 
         foreach ($array as $i => $item) {
