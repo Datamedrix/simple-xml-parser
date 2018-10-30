@@ -45,7 +45,7 @@ class Parser
      */
     public function __construct(string $xmlContent)
     {
-        $this->xmlContent = preg_replace('/<!--(.|\n)*?-->/m', '', trim($xmlContent));
+        $this->xmlContent = preg_replace('/<!--(.*|\n)-->/Uis', '', trim($xmlContent));
     }
 
     /**
