@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.0.2"></a>
+# 1.0.2 (2018-10-30)
+
+### Fixes
+
+* **parser:** update regex to remove comment tags correctly
+
 <a name="1.0.1"></a>
 # 1.0.1 (2018-10-24)
 
