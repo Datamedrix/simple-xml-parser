@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.0.3 (2019-09-09)
+
+### Fixes
+
+* **parser:** Add "Merge CDATA as text nodes" option to the default option setting.
+
 <a name="1.0.2"></a>
 # 1.0.2 (2018-10-30)
 
