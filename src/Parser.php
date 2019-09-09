@@ -29,12 +29,12 @@ class Parser
     protected $validateDTD = false;
 
     /**
-     * @var null|SimpleXMLElement
+     * @var SimpleXMLElement|null
      */
     private $xml = null;
 
     /**
-     * @var null|array
+     * @var array|null
      */
     private $arrayContent = null;
 
@@ -67,7 +67,7 @@ class Parser
      */
     protected function simpleXMLOptions(): int
     {
-        $options = LIBXML_DTDATTR | LIBXML_NOBLANKS;
+        $options = LIBXML_DTDATTR | LIBXML_NOBLANKS | LIBXML_NOCDATA;
         if ($this->validateDTD) {
             $options = $options | LIBXML_DTDVALID;
         }

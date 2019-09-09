@@ -162,30 +162,12 @@ XML;
     /**
      * Test.
      */
-    public function testConstructor()
-    {
-        $dummyContent = '<xml><foo><bar><random test="TestCase">' . rand(-100, 100) . '</random></bar></foo></xml>';
-        $parser = new Parser($dummyContent);
-
-        $this->assertAttributeNotEmpty('xmlContent', $parser);
-        $this->assertAttributeEquals($dummyContent, 'xmlContent', $parser);
-
-        $this->assertAttributeEquals(false, 'validateDTD', $parser);
-        $this->assertAttributeEquals(null, 'xml', $parser);
-        $this->assertAttributeEquals(null, 'arrayContent', $parser);
-    }
-
-    /**
-     * Test.
-     */
     public function testValidateDTD()
     {
         $parser = new Parser('<xml><foo bar="true"/></xml>');
 
         $this->assertFalse($parser->validateDTD());
         $this->assertTrue($parser->validateDTD(true));
-
-        $this->assertAttributeEquals(true, 'validateDTD', $parser);
     }
 
     /**
@@ -195,9 +177,9 @@ XML;
     {
         $parser = new ParserMock();
 
-        $this->assertEquals(LIBXML_DTDATTR | LIBXML_NOBLANKS, $parser->callSimpleXMLOptions());
+        $this->assertEquals(LIBXML_DTDATTR | LIBXML_NOBLANKS | LIBXML_NOCDATA, $parser->callSimpleXMLOptions());
         $parser->validateDTD(true);
-        $this->assertEquals(LIBXML_DTDATTR | LIBXML_NOBLANKS | LIBXML_DTDVALID, $parser->callSimpleXMLOptions());
+        $this->assertEquals(LIBXML_DTDATTR | LIBXML_NOBLANKS | LIBXML_NOCDATA | LIBXML_DTDVALID, $parser->callSimpleXMLOptions());
     }
 
     /**
@@ -206,10 +188,8 @@ XML;
     public function testSimpleXMLElement()
     {
         $parser = new ParserMock();
-
         $xml = $parser->callSimpleXMLElement();
 
-        $this->assertAttributeEquals($xml, 'xml', $parser);
         $this->assertEquals($xml, $parser->callSimpleXMLElement());
     }
 
